@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -44,8 +45,7 @@ public class EmployeeJPATest {
     public void should_return_employee_when_input_employee_name() throws Exception {
         //1.查询名字是小红的employee
         Employee expectedEmployee = new Employee(1,"xiaohong",19,"female",1,7000);
-
-        String actualName = null;
+        String actualName = employeeRepository.findByName(expectedEmployee.getName()).getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
