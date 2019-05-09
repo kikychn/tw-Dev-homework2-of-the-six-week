@@ -14,6 +14,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     public Employee findByName(String name);
 
     //2.找出Employee表中第一个姓名包含`*`字符并且薪资大于*的雇员个人信息
+    @Query(value = "SELECT * FROM employee WHERE name LIKE %?1% AND salary > ?2 LIMIT 1", nativeQuery = true)
+    public Employee findByNameContainSpecialCharAndSalaryLargeThan(String name, Integer salary);
 
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
 
