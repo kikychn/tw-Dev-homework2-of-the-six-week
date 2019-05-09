@@ -37,4 +37,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     public Integer updateNameReturnInfluenceLines(String oldName, String newName);
 
     //7.删除姓名是*的employee
+    @Modifying
+    @Query(value = "DELETE FROM employee WHERE name = ?1", nativeQuery = true)
+    public Integer deleteEmployeeByEmployeeName(String name);
 }
